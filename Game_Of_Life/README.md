@@ -1,7 +1,7 @@
 生命游戏
 ========
 
-<img src="/Demo.gif" width="100%">
+![Demo.gif](Demo.gif)
 
 ### 介绍
 
