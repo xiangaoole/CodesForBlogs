@@ -20,23 +20,6 @@ public class FileUtil {
         return ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).getFloat();
     }
 
-    public static int readIntFromC(InputStream in) throws IOException {
-        byte[] bytes = new byte[Integer.SIZE / 8];
-        in.read(bytes);
-        return ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).getInt();
-    }
-
-    public static void writeIntWithNewlineToC(DataOutputStream out, int n) throws IOException {
-        writeIntToC(out, n);
-        out.writeByte('\n');
-        out.flush();
-    }
-
-    public static void writeIntToC(DataOutputStream out, int n) throws IOException {
-        n = Integer.reverseBytes(n);
-        out.writeInt(n);
-    }
-
     /**
      * 读取 C 语言写的 float 到 <code>Float[]</code> 数组
      *
@@ -56,6 +39,23 @@ public class FileUtil {
 
     public static void writeFloatWithNewlineToC(DataOutputStream out, float f) throws IOException {
         writeIntWithNewlineToC(out, Float.floatToIntBits(f));
+    }
+
+    public static int readIntFromC(InputStream in) throws IOException {
+        byte[] bytes = new byte[Integer.SIZE / 8];
+        in.read(bytes);
+        return ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).getInt();
+    }
+
+    public static void writeIntWithNewlineToC(DataOutputStream out, int n) throws IOException {
+        writeIntToC(out, n);
+        out.writeByte('\n');
+        out.flush();
+    }
+
+    public static void writeIntToC(DataOutputStream out, int n) throws IOException {
+        n = Integer.reverseBytes(n);
+        out.writeInt(n);
     }
 
     // 读取C语言写的short
